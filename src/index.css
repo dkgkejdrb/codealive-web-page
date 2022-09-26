@@ -348,7 +348,7 @@ header .Logo {
 }
 
 .Review .Wrap {
-    width: 80%;
+    width: 90%;
     color: white;
     background-color: cornflowerblue;
     padding-top: 80px;
@@ -372,14 +372,25 @@ header .Logo {
 
 .Review .Wrap .SliderWrap .Slider{
     display: flex;
-    background-color: white;
-    width: 300px;
-    height: 300px;
+    flex-direction: row;
+    background-color: #f2f2f2;
+    width: 74%;
+    height: 320px;
     overflow: hidden;
 }
 
-.Review .Wrap .SliderWrap .Slider div{
+.Review .Wrap .SliderWrap .Slider .SliderList{
     display: flex;
-    background-color: blue;
-    transition:  5s;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.Review .Wrap .SliderWrap .Slider .SliderList #SliderElements {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(202, 193, 193);
+    /* transition: 0.2s ease-in-out; */
+    border-radius: 0.8rem;
+    padding: 45px 52px 40px 52px;
+    margin: 1%;
 }

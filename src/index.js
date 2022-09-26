@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Transition} from 'react-transition-group'
 import ReactDOM from 'react-dom/client'
 import './index.css';
@@ -292,23 +292,66 @@ const GalleryWrap = ({indexList=[], UrlList=[]}) => {
 }
 
 const Review = () => {
-    const [Step, SetStep] = useState(0)
+    const StepWeight = 800;
 
-    const listItems = ['#111', '#222', '#333'];
+    const [Step, SetStep] = useState(0);
+    const [transitionTime, SetTransitionTime] = useState(0.2);
+
+                         // 0,    -800,  -1600,  -2400,     -3200,        
+    const listItems = ['#444(1)', '#111', '#222', '#333', '#444', '#111(1)', '#222(1)'];
+
+    useEffect(() => {
+        SetStep(-800)
+    }, []);
+
     const sliderList = listItems.map((list) => 
-        <div className={list} key={list} style={{width:'300px', height: '300px', border: 'solid', transform: `translateX(${Step}px)`}}>
+        <div id='SliderElements' className={list} key={list} 
+        style={{
+            width: '690px', 
+            height: '220px', 
+            transform: `translateX(${Step}px)`,
+            transition: `${transitionTime}s ease-in-out`
+            }}>
             {list}
         </div>
     );
 
     const prevHandler = () => {
-        SetStep(Step-300);
-        console.log(Step)
-    } 
+        if(Step >= 0) {
+            SetTransitionTime(0.2);
+            SetStep(Step+StepWeight);
+            replaceLastSlide();
+        } else {
+        SetTransitionTime(0.2);
+        SetStep(Step+StepWeight);
+        }
+    }
+
+    const replaceLastSlide = () => {
+        setTimeout(() => {
+            SetTransitionTime(0);
+            SetStep(-2400); // -2400
+        }, 150, transitionTime)
+    }
+
     const nextHandler = () => {
-        SetStep(Step+300);
-        console.log(Step)
-    } 
+        if(Step <= -2400) {
+            SetTransitionTime(0.2);
+            SetStep(Step-StepWeight);
+            replaceFirstSlide();
+        } else {
+        SetTransitionTime(0.2);
+        SetStep(Step-StepWeight);
+        }
+    }
+
+    const replaceFirstSlide = () => {
+        setTimeout(() => {
+            SetTransitionTime(0);
+            SetStep(0); // 0
+            console.log(Step);
+        }, 150, transitionTime)
+    }
 
     return (
         <div className='Review'>
@@ -328,6 +371,90 @@ const Review = () => {
         </div>
     );
 }
+
+// const Review1 = () => {
+//     const listItems = [
+//         {
+//             Item1: '#111',
+//             Item2: '#222'
+//         },
+//         {
+//             Item1: '#222',
+//             Item2: '#333'
+//         },
+//         {
+//             Item1: '#333',
+//             Item2: '#444'
+//         },
+//         {
+//             Item1: '#444',
+//             Item2: '#111(1)'
+//         },
+//         {
+//             Item1: '#111(1)',
+//             Item2: '#222(1)'
+//         },
+//     ];
+
+
+//     const SlideWidth = 350;
+//     const [CurrIndex, SetCurrentIndex] = useState(0);
+
+//     const sliderList = listItems.map((list) => 
+//     <div className='SliderElementsWrap'
+//         style={{
+//             // transform: `translateX(${(-100 / SlideWidth) * (0.5 + CurrIndex)}%)`
+//             transform: `translateX(${(-350 / SlideWidth) * (0.5 + CurrIndex)}%)`
+//         }}>
+
+//         <div
+//             id='SliderElements'
+//             className={list.Item1} 
+//             // key={list.Item1}
+//             key={'1'}
+//             style={{
+//                 width:`${SlideWidth}px`, 
+//                 height: '220px',                 
+//                 }}>
+//             {list.Item1}
+//         </div>
+//         <div
+//             id='SliderElements'
+//             className={list.Item2}
+//             // key={list.Item2}
+//             key={'2'}
+//             style={{
+//                 width:`${SlideWidth}px`, 
+//                 height: '220px', 
+//                 }}>
+//             {list.Item2}
+//         </div>
+//     </div>
+// );
+
+// const handleSwipe = (direction) => {
+//     SetCurrentIndex(CurrIndex => CurrIndex + direction);
+//     console.log(`translateX(${(-350 / SlideWidth) * (0.5 + CurrIndex)}%)`);
+// }
+
+// return (
+//     <div className='Review'>
+//         <div className='Wrap'>
+//             <H1 H1Title='모두가 CodeAlive를 좋아하는 이유' H1PWidth='100%'/>
+
+//             <div className='SliderWrap'>
+//                 <button className='PrevBtn' style={{width : '100px', height : '100px'}} onClick={() => handleSwipe(-1)}>Prev</button>
+//                 <div className='Slider'>
+//                     <div className='SliderList'>
+//                         {sliderList}
+//                     </div>
+//                 </div>
+//                 <button className='NextBtn' style={{width : '100px', height : '100px'}} onClick={() => handleSwipe(1)}>Next</button>
+//             </div>
+//         </div>
+//     </div>
+// );
+// }
 
 const App = () => {
     return (
