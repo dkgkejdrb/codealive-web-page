@@ -297,18 +297,26 @@ const Review = () => {
     const [Step, SetStep] = useState(0);
     const [transitionTime, SetTransitionTime] = useState(0.2);
 
-                         // 0,    -800,  -1600,  -2400,     -3200,        
-    const listItems = ['#444(1)', '#111', '#222', '#333', '#444', '#111(1)', '#222(1)'];
+                         // 0,     -800,    -1600,  -2400,   -3200, -4000    
+    const listItems = ['#444(1)', '#111', '#222', '#333', '#444', '#111(1)'];
 
     useEffect(() => {
         SetStep(-800)
     }, []);
 
+    // useEffect(() => {
+    //     const timer = setInterval(() => {prevHandler()}, 3000);
+
+    //     return () => clearInterval(timer);
+    // }, []);
+
     const sliderList = listItems.map((list) => 
-        <div id='SliderElements' className={list} key={list} 
+        <div id='SliderElements' 
+        className={list} 
+        key={list} 
         style={{
             width: '690px', 
-            height: '220px', 
+            height: '60%', 
             transform: `translateX(${Step}px)`,
             transition: `${transitionTime}s ease-in-out`
             }}>
@@ -317,9 +325,9 @@ const Review = () => {
     );
 
     const prevHandler = () => {
-        if(Step >= 0) {
-            SetTransitionTime(0.2);
-            SetStep(Step+StepWeight);
+        if(Step >= -800) {
+            SetTransitionTime(0);
+            SetStep(-3200)
             replaceLastSlide();
         } else {
         SetTransitionTime(0.2);
@@ -329,8 +337,8 @@ const Review = () => {
 
     const replaceLastSlide = () => {
         setTimeout(() => {
-            SetTransitionTime(0);
-            SetStep(-2400); // -2400
+            SetTransitionTime(0.2);
+            SetStep(-2400);
         }, 150, transitionTime)
     }
 
@@ -359,13 +367,13 @@ const Review = () => {
                 <H1 H1Title='모두가 CodeAlive를 좋아하는 이유' H1PWidth='100%'/>
 
                 <div className='SliderWrap'>
-                    <button className='PrevBtn' style={{width : '100px', height : '100px'}} onClick={prevHandler}>Prev</button>
+                    <a className='PrevBtn' style={{width : '100px', height : '100px', fontSize : '60px', cursor : 'pointer', textAlign : 'center', color : 'gray'}} onClick={prevHandler}>&#60;</a>
                     <div className='Slider'>
                         <div className='SliderList'>
                             {sliderList}
                         </div>
                     </div>
-                    <button className='NextBtn' style={{width : '100px', height : '100px'}} onClick={nextHandler}>Next</button>
+                    <a className='NextBtn' style={{width : '100px', height : '100px', fontSize : '60px', cursor : 'pointer', textAlign : 'center', color : 'gray'}} onClick={nextHandler}>&#62;</a>
                 </div>
             </div>
         </div>

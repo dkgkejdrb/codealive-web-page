@@ -365,7 +365,7 @@ header .Logo {
 .Review .Wrap .SliderWrap {
     display: flex;
     margin-top: 120px;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     height: 100%;
 }
@@ -374,7 +374,7 @@ header .Logo {
     display: flex;
     flex-direction: row;
     background-color: #f2f2f2;
-    width: 74%;
+    width: 90%;
     height: 320px;
     overflow: hidden;
 }
