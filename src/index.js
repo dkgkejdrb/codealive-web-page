@@ -163,37 +163,61 @@ const SelectScreen = () => {
         );
     }
 
+    const [circleColor1, setColor1] = useState(''); 
+    const [circleColor2, setColor2] = useState('');
+    const [circleColor3, setColor3] = useState('');
+    const [circleFontColor1, setFontColor1] = useState(''); 
+    const [circleFontColor2, setFontColor2] = useState('');
+    const [circleFontColor3, setFontColor3] = useState('');
     const HandleValue = (event, num) => {
-        if(num === 1) { 
+        if(num === 1) {
             setPicture(<FirstPicture />);
+            setColor1('rgb(0, 62, 77)');
+            setColor2('');
+            setColor3('');
+            setFontColor1('white');
+            setFontColor2('grey');
+            setFontColor3('grey');
         } else if(num === 2) {  
             setPicture(<SecondPicture />);
+            setColor1('');
+            setColor2('rgb(0, 62, 77)');
+            setColor3('');
+            setFontColor1('grey');
+            setFontColor2('white');
+            setFontColor3('grey');
         } else { 
             setPicture(<ThirdPicture />);
+            setColor1('');
+            setColor2('');
+            setColor3('rgb(0, 62, 77)');
+            setFontColor1('grey')
+            setFontColor2('grey')
+            setFontColor3('white')
         }
         event.preventDefault();
     }
-
+    
     return (
         <div className='Wrap'>
             <div className='Left'>
                 <a className='1' href='#' onClick={(event) => HandleValue(event, 1)}>
-                    <div id='CircleNumber'> 
-                        <div>1</div> 
+                    <div id='CircleNumber' style={{backgroundColor : circleColor1}} > 
+                        <div style={{color : circleFontColor1}}>1</div> 
                     </div>
-                    <H2 H2Title='단계별 학습'/>
+                    <H1 H1Title='단계별 학습'/>
                 </a>
                 <a className='2' href='#' onClick={(event) => HandleValue(event, 2)}>
-                    <div id='CircleNumber'> 
-                        <div>2</div> 
+                    <div style={{backgroundColor : circleColor2}} id='CircleNumber'> 
+                        <div style={{color : circleFontColor2}}>2</div> 
                     </div>
-                    <H2 H2Title='인터랙티브 콘텐츠'/>
+                    <H1 H1Title='인터랙티브 콘텐츠'/>
                 </a>
                 <a className='3' href='#' onClick={(event) => HandleValue(event, 3)}>
-                    <div id='CircleNumber'> 
-                        <div>3</div> 
+                    <div style={{backgroundColor : circleColor3}} id='CircleNumber'> 
+                        <div style={{color : circleFontColor3}}>3</div> 
                     </div>
-                    <H2 H2Title='비주얼 프로그래밍'/>
+                    <H1 H1Title='비주얼 프로그래밍'/>
                 </a>
             </div>
             <div className='Right'>
@@ -291,74 +315,186 @@ const GalleryWrap = ({indexList=[], UrlList=[]}) => {
     )
 }
 
-const Review = () => {
-    const StepWeight = 800;
+
+
+const Review = ({sliderWidth}) => {
+    const sliderHeight = parseInt(sliderWidth) * 0.28;
+    const sliderElementsWidth = parseInt(sliderWidth)*0.45-100;
+    const sliderSpeed = parseInt(sliderWidth) * 0.5;
 
     const [Step, SetStep] = useState(0);
     const [transitionTime, SetTransitionTime] = useState(0.2);
+   
+    const listItems = [
+        {
+            key : '#444(1)',
+            text : `"codeAlive는 정말 재미있습니다. 저는 함수, 루프, 조건문을 배웠고 멋진 프로젝트를 만들었습니다. 또한 그로 인해 디지털 큐레이터라는 미래를 꿈꾸게 되었습니다."`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile.png)',
+            user : '배정빈 | 아주중3'
+        },
 
-                         // 0,     -800,    -1600,  -2400,   -3200, -4000    
-    const listItems = ['#444(1)', '#111', '#222', '#333', '#444', '#111(1)'];
+        {
+            key : '#111',
+            text : `"코딩을 중학교에 올라와서 시작했는데 codeAlive는 파이썬을 정말 쉽고 흥미롭게 배울 수 있습니다. 아이가 복잡한 코드로 스스로 게임작품을 만드는 것을 보니 놀랍습니다."`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile2.png)',
+            user : '서이 Mom | 늘푸른중1'
+        },
+
+        {
+            key : '#222',
+            text : `"제 아들은 codeAlive를 정말 좋아합니다. 스크래치를 하다가 파이썬을 혼자 하기 시작했는데 어려워서 코딩을 그만뒀어요. codeAlive를 만나 파이썬을 재미있고 체계적으로 배울 수 있어 정말 다행입니다."`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile3.png)',
+            user : '서준 Dad | 방배초6'
+        },
+
+        {
+            key : '#333',
+            text : `"codeAlive를 사용할 기회가 있어서 정말 기뻤습니다. 우리반 학생들은 모두 여학생이지만 이렇게 높은 참여를 이끌어 내는 프로그램은 지금까지 없었습니다. 텍스트 코딩이 처음인 아이들도 쉽게 이해할 수 있도록 잘 설계된 안내와 코스는 훌륭한 도구라고 생각됩니다."`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile4.png)',
+            user : '이지현 | 중등교사'
+        },
+
+        {
+            key : '#444',
+            text : `"codeAlive는 정말 재미있습니다. 저는 함수, 루프, 조건문을 배웠고 멋진 프로젝트를 만들었습니다. 또한 그로 인해 디지털 큐레이터라는 미래를 꿈꾸게 되었습니다."`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile.png)',
+            user : '배정빈 | 아주중3'
+        },
+
+        {
+            key : '#111(1)',
+            text : `"코딩을 중학교에 올라와서 시작했는데 codeAlive는 파이썬을 정말 쉽고 흥미롭게 배울 수 있습니다. 아이가 복잡한 코드로 스스로 게임작품을 만드는 것을 보니 놀랍습니다.'"`,
+            url : 'url(https://www.codealive.co.kr/images/main/img_profile2.png)',
+            user : '서이 Mom | 늘푸른중1'
+        }
+    ];
 
     useEffect(() => {
-        SetStep(-800)
+        SetStep(-sliderSpeed);    
     }, []);
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {prevHandler()}, 3000);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nextHandler();
 
-    //     return () => clearInterval(timer);
-    // }, []);
+        }, 4000);
+
+        return () => clearInterval(timer);
+    }, [Step]);
+
 
     const sliderList = listItems.map((list) => 
         <div id='SliderElements' 
-        className={list} 
-        key={list} 
+        className={list.key} 
+        key={list.key}
         style={{
-            width: '690px', 
-            height: '60%', 
+            flexDirection: 'column',
+            width: `${sliderElementsWidth}px`,
+            height: '70%', 
             transform: `translateX(${Step}px)`,
             transition: `${transitionTime}s ease-in-out`
             }}>
-            {list}
+            {list.text}
+            <div id='Profile' style={{width : '100%', height : '100%'}}>
+                <div style={{width:'100px', height:'100px', backgroundPosition : 'center'}}> 
+                    <div style={{width:'100%', height:'100%', backgroundSize : 'cover', backgroundImage : list.url}}></div>
+                </div>
+                <div style={{}}>
+                    {list.user}
+                </div>
+            </div>
         </div>
     );
 
     const prevHandler = () => {
-        if(Step >= -800) {
+        if(Step >= 0) {
             SetTransitionTime(0);
-            SetStep(-3200)
+            SetStep(-(sliderSpeed*(listItems.length-2))) // *4
             replaceLastSlide();
         } else {
         SetTransitionTime(0.2);
-        SetStep(Step+StepWeight);
+        SetStep(Step+sliderSpeed);
         }
     }
 
     const replaceLastSlide = () => {
         setTimeout(() => {
             SetTransitionTime(0.2);
-            SetStep(-2400);
+            SetStep(-(sliderSpeed*(listItems.length-3))); // *3
         }, 150, transitionTime)
     }
 
     const nextHandler = () => {
-        if(Step <= -2400) {
+        if(Step <= -2400) { // *4
             SetTransitionTime(0.2);
-            SetStep(Step-StepWeight);
+            SetStep(Step-sliderSpeed);
             replaceFirstSlide();
         } else {
         SetTransitionTime(0.2);
-        SetStep(Step-StepWeight);
+        SetStep(Step-sliderSpeed);
         }
     }
 
     const replaceFirstSlide = () => {
         setTimeout(() => {
             SetTransitionTime(0);
-            SetStep(0); // 0
-            console.log(Step);
+            SetStep(0); // *0
         }, 150, transitionTime)
+    }
+
+    const SliderNavHandler = () => {
+        const NavBtns = null;
+
+        if(Step === -sliderSpeed * 0)
+        {
+            return (
+                <div className='Wrap'>
+                    <a style={{backgroundColor : '#117a8b'}} className='NavBtn' onClick={() => SetStep(-sliderSpeed * 0)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 1)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 2)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 3)}></a>
+                </div>
+            );
+        } else if(Step === -sliderSpeed * 1)
+        {
+            return (
+                <div className='Wrap'>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 0)}></a>
+                    <a style={{backgroundColor : '#117a8b'}} className='NavBtn' onClick={() => SetStep(-sliderSpeed * 1)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 2)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 3)}></a>
+                </div>
+            );
+        } else if(Step === -sliderSpeed * 2)
+        {
+            return (
+                <div className='Wrap'>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 0)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 1)}></a>
+                    <a style={{backgroundColor : '#117a8b'}} className='NavBtn' onClick={() => SetStep(-sliderSpeed * 2)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 3)}></a>
+                </div>
+            );
+        } else if(Step === -sliderSpeed * 3)
+        {
+            return (
+                <div className='Wrap'>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 0)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 1)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 2)}></a>
+                    <a style={{backgroundColor : '#117a8b'}} className='NavBtn' onClick={() => SetStep(-sliderSpeed * 3)}></a>
+                </div>
+            );
+        } else {
+            return (
+                <div className='Wrap'>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 0)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 1)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 2)}></a>
+                    <a className='NavBtn' onClick={() => SetStep(-sliderSpeed * 3)}></a>
+                </div>
+            );            
+        }
     }
 
     return (
@@ -368,101 +504,76 @@ const Review = () => {
 
                 <div className='SliderWrap'>
                     <a className='PrevBtn' style={{width : '100px', height : '100px', fontSize : '60px', cursor : 'pointer', textAlign : 'center', color : 'gray'}} onClick={prevHandler}>&#60;</a>
-                    <div className='Slider'>
+                    <div className='Slider' style={{width : sliderWidth, height : `${sliderHeight}px`}}>
                         <div className='SliderList'>
                             {sliderList}
                         </div>
                     </div>
                     <a className='NextBtn' style={{width : '100px', height : '100px', fontSize : '60px', cursor : 'pointer', textAlign : 'center', color : 'gray'}} onClick={nextHandler}>&#62;</a>
                 </div>
+                <div className='SliderNav'> 
+                    <SliderNavHandler />
+                </div>                    
             </div>
         </div>
     );
 }
 
-// const Review1 = () => {
-//     const listItems = [
-//         {
-//             Item1: '#111',
-//             Item2: '#222'
-//         },
-//         {
-//             Item1: '#222',
-//             Item2: '#333'
-//         },
-//         {
-//             Item1: '#333',
-//             Item2: '#444'
-//         },
-//         {
-//             Item1: '#444',
-//             Item2: '#111(1)'
-//         },
-//         {
-//             Item1: '#111(1)',
-//             Item2: '#222(1)'
-//         },
-//     ];
+const Partner = () => {
+    return ( 
+        <div className='Partner'>
+            <div className='Wrap'>
+                <H1 H1PWidth='100%' H1Title='메타버스 코딩 학습 프로그램' />
+                <H2 H2PWidth='100%' H2Title='메타버스 코딩 플랫폼에서 배우는' />
+                <H2 H2PWidth='100%' H2Title='파이썬 버추얼 클래스' />
+                <H2 H2PWidth='100%' H2Title='codeAlive와 함께 쉽고 재미있게 경험하세요.' />
+                <div className='PartnerBtnWrap' style={{width : '100%', height : '15%', marginTop : '40px'}}>
+                    <a className='PartnerBtn' href ='https://form.office.naver.com/form/responseView.cmd?formkey=ZmM3NDIzYjQtODBlNy00MTJiLWJjNzktNzQ1MjQ1OTcwZjMz&sourceId=urlshare' style={{fontSize : '1.3rem', color : 'rgb(0, 62, 77)', borderRadius : '45px', backgroundColor : 'white', padding : '1.8rem 6rem 1.8rem 6rem', cursor : 'pointer', textDecoration : 'none'}} >도입문의</a>
+                </div>
+            </div>
+        </div>
+    );
+}
 
+const Footer = () => {
+    return  (
+        <div className='Footer'>
+            <div className='Wrap'>
+                <div className='Logo' style={{width : '133px', height : '27px', padding : '1rem'}}>
+                    <div style={{width : '100%', height : '100%', backgroundImage : 'url(https://www.codealive.co.kr/images/creverse_logo.svg)', backgroundSize: 'cover',backgroundPosition: 'center'}}>
 
-//     const SlideWidth = 350;
-//     const [CurrIndex, SetCurrentIndex] = useState(0);
+                    </div>
+                </div>
+                <div className='IncWrap' style={{width:'100%', height : '100px'}}>
+                    <div className='Inc' style={{width:'60%', height : '70%'}}>
+                        <P PWidth='100%' PText='서울특별시 강남구 테헤란로 521, 21층(삼성동, 파르나스타워) | ㈜크레버스 대표이사 : 이충국 | 사업자등록번호 : 211-87-16710'/>
+                        <P PWidth='100%' PText='대표전화 : 02-3429-9407 | 통신판매업신고 제 강남-8282호'/>
+                    </div>
+                    <div className='IncList' style={{width:'40%', height : '70%'}}>
+                        <select style={{width: '180px', height : '30px',background : '#343a40', color : 'white', border : 'solid 0.1px white'}}>
+                            <option>FAMILY SITE</option>  
+                            <option>크레버스</option>
+                            <option>씨큐브코딩</option>
+                            <option>LC</option>
+                            <option>VLC</option>
+                            <option>CMS영재교육센터</option>
+                            <option>영재관</option>
+                        </select>    
+                    </div>    
+                </div>                
+            </div>
+        </div>
+    );
+}
 
-//     const sliderList = listItems.map((list) => 
-//     <div className='SliderElementsWrap'
-//         style={{
-//             // transform: `translateX(${(-100 / SlideWidth) * (0.5 + CurrIndex)}%)`
-//             transform: `translateX(${(-350 / SlideWidth) * (0.5 + CurrIndex)}%)`
-//         }}>
+const Copyright = () => {
+    return (
+        <div className='Copyright'>
+            Copyright © CREVERSE Inc. All right reserved.
+        </div>
+    );
+}
 
-//         <div
-//             id='SliderElements'
-//             className={list.Item1} 
-//             // key={list.Item1}
-//             key={'1'}
-//             style={{
-//                 width:`${SlideWidth}px`, 
-//                 height: '220px',                 
-//                 }}>
-//             {list.Item1}
-//         </div>
-//         <div
-//             id='SliderElements'
-//             className={list.Item2}
-//             // key={list.Item2}
-//             key={'2'}
-//             style={{
-//                 width:`${SlideWidth}px`, 
-//                 height: '220px', 
-//                 }}>
-//             {list.Item2}
-//         </div>
-//     </div>
-// );
-
-// const handleSwipe = (direction) => {
-//     SetCurrentIndex(CurrIndex => CurrIndex + direction);
-//     console.log(`translateX(${(-350 / SlideWidth) * (0.5 + CurrIndex)}%)`);
-// }
-
-// return (
-//     <div className='Review'>
-//         <div className='Wrap'>
-//             <H1 H1Title='모두가 CodeAlive를 좋아하는 이유' H1PWidth='100%'/>
-
-//             <div className='SliderWrap'>
-//                 <button className='PrevBtn' style={{width : '100px', height : '100px'}} onClick={() => handleSwipe(-1)}>Prev</button>
-//                 <div className='Slider'>
-//                     <div className='SliderList'>
-//                         {sliderList}
-//                     </div>
-//                 </div>
-//                 <button className='NextBtn' style={{width : '100px', height : '100px'}} onClick={() => handleSwipe(1)}>Next</button>
-//             </div>
-//         </div>
-//     </div>
-// );
-// }
 
 const App = () => {
     return (
@@ -473,10 +584,10 @@ const App = () => {
             <Features />
             <Course />
             <Project />
-            <Review />
-            <div className='seventhRow'> </div>
-            <div className='eighthRow'> </div>
-            <footer> </footer>
+            <Review sliderWidth={'1800px'}/>
+            <Partner />
+            <Footer />
+            <Copyright />
         </div>
     );
 }
