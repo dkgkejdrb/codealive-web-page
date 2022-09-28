@@ -1,14 +1,16 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Transition} from 'react-transition-group'
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client'
+import {Link} from 'react-scroll';
 import './index.css';
 
-const HeaderBtn = ({indexList=[], hrefList=[], headerLinkNameList=[]}) => {
+
+const HeaderBtn = ({indexList=[], idList=[], headerLinkNameList=[]}) => {
         const className = 'HeaderBtn';
         const listItems = indexList.map((number) => 
-            <a className={className} key={number.toString()} href={hrefList[number]}>
+            // <Link className={className} key={number.toString()} id={idList[number]}>
+            <Link className={className} key={number.toString()} to={idList[number]} spy={true} smooth={true} style={{cursor : 'pointer'}}>
             <span>{headerLinkNameList[number]}</span>
-        </a>
+        </Link>
         );
         return (
             <div className='Container'>
@@ -23,7 +25,7 @@ const Header = () => {
             <a className='Logo' href='/#home'></a>
                 <HeaderBtn 
                 indexList={[0, 1, 2, 3, 4, 5]} 
-                hrefList={['/#intro', '/#features', '/#course', '/#project', '/#review', '/#partner']}
+                idList={['/#intro', '/#features', '/#course', '/#project', '/#review', '/#partner']}
                 headerLinkNameList={['Introduction', 'Features', 'Course', 'Project', 'Review', 'Partner']}
                 />
         </header>
@@ -72,7 +74,7 @@ const IframeWrap = ({IframeWrapSrc=''}) => {
 
 const Introduction = () => {
     return (
-        <div className='Introduction'>
+        <div className='Introduction' id='/#intro'>
             <div className='Left'>
                 <IframeWrap IframeWrapSrc={'https://www.youtube.com/embed/IeGj7s_KuFg'}/>
             </div>
@@ -89,7 +91,7 @@ const Introduction = () => {
 
 const Features = () => {
     return (
-        <div className='Features'>
+        <div className='Features' id='/#features'>
             <div className='Title'>
                 <H1 H1PWidth={1200} 
                 H1Title='실시간 인터랙티브 메타버스 코딩교육 플랫폼'
@@ -231,7 +233,7 @@ const SelectScreen = () => {
 
 const Course = () => {
     return (
-        <div className='Course'>
+        <div className='Course' id='/#course'>
             <div className='Wrap'>
                 <H1 H1Title='커리큘럼' H1PWidth='100%'/>
                 <br></br>
@@ -270,7 +272,7 @@ const CourseBox = ({BoxNumbers=[], BoxTitles=[], BoxTexts=[]}) => {
 
 const Project = () => {
     return (
-        <div className='Project'>
+        <div className='Project' id='/#project'>
             <div className='Wrap'>
             <H1 H1Title='CodeAlive의 무한한 창의력' H1PWidth='100%'/>
                 <br></br>
@@ -498,7 +500,7 @@ const Review = ({sliderWidth}) => {
     }
 
     return (
-        <div className='Review'>
+        <div className='Review' id='/#review'>
             <div className='Wrap'>
                 <H1 H1Title='모두가 CodeAlive를 좋아하는 이유' H1PWidth='100%'/>
 
@@ -521,7 +523,7 @@ const Review = ({sliderWidth}) => {
 
 const Partner = () => {
     return ( 
-        <div className='Partner'>
+        <div className='Partner' id='/#partner'>
             <div className='Wrap'>
                 <H1 H1PWidth='100%' H1Title='메타버스 코딩 학습 프로그램' />
                 <H2 H2PWidth='100%' H2Title='메타버스 코딩 플랫폼에서 배우는' />

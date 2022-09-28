@@ -78,8 +78,10 @@ header {
     width: 100%;
     height: 70px;
     background-color: whitesmoke;
-
     position: fixed;
+
+    /* div 최상단 위치 */
+    z-index: 1;
 }
 
 header > .Container {
@@ -159,7 +161,8 @@ header .Logo {
 }
 
 .Features {
-    padding-top: 60px;
+    /* padding-top: 60px; */
+    padding-top: 80px;
     width: 80%;
     height: 800px;
     display: flex;
@@ -260,8 +263,9 @@ header .Logo {
 
 .Course {   
     height: 800px;
-    margin-top: 80px;
+    margin-top: 120px;
     margin-bottom: 80px;
+    padding-top: 40px;
     background-color: #f2f2f2;
 }
 
@@ -509,4 +513,3 @@ header .Logo {
     align-items: center;
     color: rgb(162, 162, 162);
 }
-
