@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css';
-import { Header } from './Components/Header';
-import { VideoWrap } from './Components/VideoWrap';
-import { Introduction } from './Components/Introduction';
-import { Features } from './Components/Features';
-import { Course } from './Components/Course';
-import { Project } from './Components/Project';
-import { Review } from './Components/Review_InfiniteSlider';
-import { Partner } from './Components/Partner';
-import { Footer } from './Components/Footer';
-import { Copyright } from './Components/Copyright';
-import { Contact } from './Components/Contact';
+import Header from './Components/Header';
+import VideoWrap from './Components/VideoWrap';
+import Introduction from './Components/Introduction';
+import Features from './Components/Features';
+import Course from './Components/Course';
+import Project from './Components/Project';
+import Review from './Components/Review_InfiniteSlider';
+import Partner from './Components/Partner';
+import Footer from './Components/Footer';
+import Copyright from './Components/Copyright';
+import Contact from './Components/Contact';
 
 
 

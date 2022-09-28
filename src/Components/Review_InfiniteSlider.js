@@ -148,8 +148,6 @@ const Review = ({sliderWidth}) => {
     }
 
     const SliderNavHandler = () => {
-        const NavBtns = null;
-
         if(Step === -sliderSpeed * 0)
         {
             return (
@@ -225,4 +223,4 @@ const Review = ({sliderWidth}) => {
     );
 }
 
-export { Review }
+export default Review;

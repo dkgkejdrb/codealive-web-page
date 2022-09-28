@@ -173,4 +173,4 @@ const SelectScreen = () => {
     );
 }
 
-export { Features }
+export default Features; 

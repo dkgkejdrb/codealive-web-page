@@ -1,10 +1,10 @@
 import {Link} from 'react-scroll';
 
-const HeaderBtn = ({indexList=[], idList=[], headerLinkNameList=[]}) => {
+const HeaderBtn = ({idList=[], headerLinkNameList=[]}) => {
     const className = 'HeaderBtn';
-    const listItems = indexList.map((number) => 
-        <Link className={className} key={number.toString()} to={idList[number]} spy={true} smooth={true} style={{cursor : 'pointer'}}>
-        <span>{headerLinkNameList[number]}</span>
+    const listItems = idList.map((value, index) => 
+        <Link className={className} key={index.toString()} to={idList[index]} spy={true} smooth={true} style={{cursor : 'pointer'}}>
+        <span>{headerLinkNameList[index]}</span>
     </Link>
     );
     return (
@@ -18,8 +18,7 @@ const Header = () => {
 return (
     <header>
         <Link className='Logo' to='/#home' spy={true} smooth={true} style={{cursor:'pointer'}}></Link>
-            <HeaderBtn 
-            indexList={[0, 1, 2, 3, 4, 5]} 
+            <HeaderBtn
             idList={['/#intro', '/#features', '/#course', '/#project', '/#review', '/#partner']}
             headerLinkNameList={['Introduction', 'Features', 'Course', 'Project', 'Review', 'Partner']}
             />
@@ -27,4 +26,4 @@ return (
 )
 }
 
-export { Header }
+export default Header;

@@ -20,8 +20,6 @@ const P = ({PText='', PWidth=550}) => {
         <p style={{width: PWidth}}>{PText}</p>); }
 }
 
-
-
 const Course = () => {
     return (
         <div className='Course' id='/#course'>
@@ -29,7 +27,7 @@ const Course = () => {
                 <H1 H1Title='커리큘럼' H1PWidth='100%'/>
                 <br></br>
                 <P PText='입문자부터 전문가까지 모두를 위한 스캐폴딩 커리큘럼' PWidth='100%'/>
-                <CourseBox BoxNumbers={[0, 1, 2]} 
+                <CourseBox
                 BoxTitles={['Power Base', 'Core Algorithm', 'Super AI']}
                 BoxTexts={[
                     'Python의 기본문법 순차, 선택, 반복 구조 객체 지향 프로그래밍 패러다임',
@@ -42,23 +40,23 @@ const Course = () => {
     );
 }
 
-const CourseBox = ({BoxNumbers=[], BoxTitles=[], BoxTexts=[]}) => {
-    const listItems = BoxNumbers.map((BoxNumber) =>
-        <div className={BoxNumber} key={BoxNumber.toString()}>
-            <H1 H1Title={BoxTitles[BoxNumber]} H1PWidth='80%'/>
+const CourseBox = ({BoxTitles=[], BoxTexts=[]}) => {
+    const listItems = BoxTitles.map((value, index) =>
+        <div className={index} key={index.toString()}>
+            <H1 H1Title={BoxTitles[index]} H1PWidth='80%'/>
             <div>
                 <H2 H2Title='24 Lessons x 100min'/>
                 <br></br>
                 <br></br>
-                <p>{BoxTexts[BoxNumber]}</p>            
+                <p>{BoxTexts[index]}</p>            
             </div>
         </div>
     );
     return (
         <div className='BoxWrap'>
             {listItems}
-        </div>
+         </div>
     );
 }
 
-export {Course}
+export default Course;

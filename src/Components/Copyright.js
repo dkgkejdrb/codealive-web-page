@@ -6,4 +6,4 @@ const Copyright = () => {
     );
 }
 
-export { Copyright }
+export default Copyright;

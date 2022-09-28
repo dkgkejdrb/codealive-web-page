@@ -31,7 +31,7 @@ const Project = () => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <GalleryWrap indexList={[0, 1, 2]} 
+                <GalleryWrap
                 UrlList={[
                     'url(https://www.codealive.co.kr/images/main/img_project.jpg)',
                     'url(https://www.codealive.co.kr/images/main/img_project2.gif)',
@@ -43,7 +43,8 @@ const Project = () => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <GalleryWrap indexList={[0, 1, 2]} UrlList={[
+                <GalleryWrap
+                UrlList={[
                     'url(https://www.codealive.co.kr/images/main/img_project4.gif)',
                     'url(https://www.codealive.co.kr/images/main/img_project5.gif)',
                     'url(https://www.codealive.co.kr/images/main/img_project6.jpg)'
@@ -53,8 +54,8 @@ const Project = () => {
     );
 }
 
-const GalleryWrap = ({indexList=[], UrlList=[]}) => {
-    const listItems = indexList.map((index) =>
+const GalleryWrap = ({UrlList=[]}) => {
+    const listItems = UrlList.map((value, index) =>
         <div className={index} 
         key={index.toString()}
         style={{
@@ -71,4 +72,4 @@ const GalleryWrap = ({indexList=[], UrlList=[]}) => {
     )
 }
 
-export { Project }
+export default Project;

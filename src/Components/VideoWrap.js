@@ -8,4 +8,4 @@ const VideoWrap = ({VideoWrapSrc=''}) => {
     );
 }
 
-export { VideoWrap }
+export default VideoWrap;
